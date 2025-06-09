@@ -7,6 +7,11 @@ import { News } from './news.interface';
 @Injectable()
 export class NewsService {
     private readonly url = 'http://localhost:3001/news';
+    private readonly config: AxiosRequestConfig = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
 
     constructor(private readonly httpService: HttpService) { }
 
@@ -22,14 +27,21 @@ export class NewsService {
         return data;
     }
 
-    async create(body: News): Promise<News> {
-        const config: AxiosRequestConfig = {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        };
+    async findOne(entry_id: number): Promise<News[]> {
         const { data } = await firstValueFrom(
-            this.httpService.post<News>(this.url, body, config).pipe(
+            this.httpService.get<News[]>(`${this.url}?entry_id=${entry_id}`).pipe(
+                catchError((error: AxiosError) => {
+                    throw new NotFoundException();
+                })
+            )
+        );
+
+        return data;
+    }
+
+    async create(body: News): Promise<News> {
+        const { data } = await firstValueFrom(
+            this.httpService.post<News>(this.url, body, this.config).pipe(
                 catchError((error: AxiosError) => {
                     throw new BadRequestException();
                 })
@@ -39,7 +51,15 @@ export class NewsService {
         return data;
     }
 
-    updateNews() {
+    async update(id: string, body: News): Promise<News> {
+        const { data } = await firstValueFrom(
+            this.httpService.put<News>(`${this.url}/${id}`, body, this.config).pipe(
+                catchError((error: AxiosError) => {
+                    throw new BadRequestException();
+                })
+            )
+        );
 
+        return data;
     }
 }
