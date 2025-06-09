@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { Observable } from 'rxjs';
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { catchError, firstValueFrom } from 'rxjs';
+import { AxiosError, AxiosRequestConfig } from 'axios';
 import { News } from './news.interface';
 
 @Injectable()
@@ -10,18 +10,33 @@ export class NewsService {
 
     constructor(private readonly httpService: HttpService) { }
 
-    findAll(): Observable<AxiosResponse<News[]>> {
-        return this.httpService.get(`${this.url}?_sort=-update_date&_limit=17`);
+    async findAll(): Promise<News[]> {
+        const { data } = await firstValueFrom(
+            this.httpService.get<News[]>(`${this.url}?_sort=-update_date&_limit=17`).pipe(
+                catchError((error: AxiosError) => {
+                    throw new NotFoundException();
+                })
+            )
+        );
+
+        return data;
     }
 
-    create(body: News): Observable<AxiosResponse> {
+    async create(body: News): Promise<News> {
         const config: AxiosRequestConfig = {
             headers: {
                 "Content-Type": "application/json"
             }
         };
+        const { data } = await firstValueFrom(
+            this.httpService.post<News>(this.url, body, config).pipe(
+                catchError((error: AxiosError) => {
+                    throw new BadRequestException();
+                })
+            )
+        );
 
-        return this.httpService.post(this.url, body, config);
+        return data;
     }
 
     updateNews() {
