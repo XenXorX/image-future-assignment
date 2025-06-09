@@ -1,5 +1,10 @@
-import { ArgumentMetadata, Injectable, PipeTransform, UnprocessableEntityException } from '@nestjs/common';
-import { News } from '../news.interface';
+import {
+  ArgumentMetadata,
+  Injectable,
+  PipeTransform,
+  UnprocessableEntityException,
+} from "@nestjs/common";
+import { News } from "../news.interface";
 
 @Injectable()
 export class ValidateNewsPipe implements PipeTransform {
@@ -11,11 +16,11 @@ export class ValidateNewsPipe implements PipeTransform {
       "create_date",
       "update_date",
       "img_src",
-      "redirect_url"
+      "redirect_url",
     ];
 
-    for (let key of newsKeys) {
-      if (value[key] === undefined) throw new UnprocessableEntityException;
+    for (const key of newsKeys) {
+      if (value[key] === undefined) throw new UnprocessableEntityException();
     }
 
     return value;
