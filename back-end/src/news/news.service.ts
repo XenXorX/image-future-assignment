@@ -1,7 +1,6 @@
 import {
   BadRequestException,
   Injectable,
-  NotFoundException,
 } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { catchError, firstValueFrom } from "rxjs";
@@ -25,7 +24,7 @@ export class NewsService {
         .get<News[]>(`${this.url}?_sort=-update_date&_limit=17`)
         .pipe(
           catchError((error: AxiosError) => {
-            throw new NotFoundException();
+            throw new BadRequestException();
           }),
         ),
     );
@@ -37,7 +36,7 @@ export class NewsService {
     const { data } = await firstValueFrom(
       this.httpService.get<News[]>(`${this.url}?entry_id=${entry_id}`).pipe(
         catchError((error: AxiosError) => {
-          throw new NotFoundException();
+          throw new BadRequestException();
         }),
       ),
     );
