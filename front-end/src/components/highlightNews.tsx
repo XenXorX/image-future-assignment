@@ -6,21 +6,24 @@ export default function HighlightNews({ highlightNews }: any) {
             <div className="carousel w-full">
                 {highlightNews.map((news: any) => (
                     <div id={'news_' + news.entry_id} className="carousel-item w-full">
-                        <div className="card xl:card-side bg-base-100">
-                            <figure>
-                                <img
-                                    src={news.img_src}
-                                    alt={news.title} />
-                            </figure>
-                            <div className="card-body">
-                                <h2 className="card-title">{news.title}</h2>
-                                <span>{convertDate(news.update_date)}</span>
-                                <span className="badge badge-neutral badge-outline justify-end">{news.channel_name}</span>
+                        <a href={news.redirect_url} >
+                            <div className="flex flex-row">
+                                <div className="basis-2/3">
+                                    <img src={news.img_src} alt={news.title} />
+                                </div>
+                                <div className="basis-1/3 p-5">
+                                    <h2 className="text-xl font-bold">{news.title}</h2>
+                                    <div className="flex justify-between">
+                                        <p className="font-light">{convertDate(news.update_date)}</p>
+                                        <div className="badge badge-neutral badge-outline">{news.channel_name}</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+                        </a>
+                    </div >
+                ))
+                }
+            </div >
             <div className="flex w-full justify-center gap-2 py-2">
                 {highlightNews.map((news: any, i: number) => (
                     <a href={'#news_' + news.entry_id} className="btn btn-xs">{i + 1}</a>

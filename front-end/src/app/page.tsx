@@ -15,9 +15,6 @@ export default async function Home() {
         <div className="grid grid-cols-6 gap-4">
 
           <div className="col-span-4">
-
-            {/* highlight news */}
-
             <HighlightNews highlightNews={highlightNews} />
 
             {/* normal news */}
