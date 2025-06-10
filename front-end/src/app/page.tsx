@@ -1,5 +1,6 @@
 import HighlightNews from '@/components/highlightNews';
 import SideNewsNews from '@/components/sideNews';
+import SmallSideNews from '@/components/smallSideNews';
 
 export default async function Home() {
   const newsData = await fetch(`http://localhost:3000/news`);
@@ -44,31 +45,7 @@ export default async function Home() {
 
           <div className="col-span-2">
             <SideNewsNews sideNews={sideNews} />
-
-            {/* smallSide news */}
-
-            <div className="col-span-2 grid grid-cols-subgrid gap-4">
-              {smallSideNews.map((news: any) => (
-                <div className="flex justify-center">
-                  <div className="card bg-base-100 w-96 m-2">
-                    <figure>
-                      <img
-                        src={news.img_src}
-                        alt={news.title} />
-                    </figure>
-                    <div className="card-body">
-                      <h2 className="card-title">{news.title}</h2>
-                      <div className="card-actions justify-end">
-                        {/* <span>{convertDate(news.update_date)}</span> */}
-                        <div className="badge badge-neutral badge-outline">{news.channel_name}</div>
-                      </div>
-                    </div>
-                    <div className="divider" />
-                  </div>
-                </div>
-              ))}
-            </div>
-
+            <SmallSideNews smallSideNews={smallSideNews} />
           </div>
 
         </div>
