@@ -12,7 +12,7 @@ export default function HighlightNews({ highlightNews }: any) {
                                     <img src={news.img_src} alt={news.title} />
                                 </div>
                                 <div className="basis-1/3 p-5">
-                                    <h2 className="text-xl font-bold">{news.title}</h2>
+                                    <h2 className="text-xl font-bold mb-2">{news.title}</h2>
                                     <div className="flex justify-between">
                                         <p className="font-light">{convertDate(news.update_date)}</p>
                                         <div className="badge badge-neutral badge-outline">{news.channel_name}</div>
