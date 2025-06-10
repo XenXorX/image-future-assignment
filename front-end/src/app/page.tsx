@@ -1,4 +1,5 @@
 import HighlightNews from '@/components/highlightNews';
+import NormalNews from '@/components/normalNews';
 import SideNewsNews from '@/components/sideNews';
 import SmallSideNews from '@/components/smallSideNews';
 
@@ -17,30 +18,7 @@ export default async function Home() {
 
           <div className="col-span-4">
             <HighlightNews highlightNews={highlightNews} />
-
-            {/* normal news */}
-
-            <div className="grid grid-cols-4 gap-4">
-              {normalNews.map((news: any) => (
-                <div className="flex">
-                  <div className="card bg-base-100 w-96 m-2">
-                    <figure>
-                      <img
-                        src={news.img_src}
-                        alt={news.title} />
-                    </figure>
-                    <div className="card-body">
-                      <h2 className="card-title">{news.title}</h2>
-                      <div className="card-actions justify-end">
-                        {/* <span>{convertDate(news.update_date)}</span> */}
-                        <div className="badge badge-neutral badge-outline">{news.channel_name}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
+            <NormalNews normalNews={normalNews} />
           </div>
 
           <div className="col-span-2">
