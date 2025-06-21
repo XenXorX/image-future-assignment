@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <main>
       <div className="p-5">
-        <h4 className='flex justify-center font-serif text-5xl'>Image Future Assignment</h4>
+        <h4 className='flex justify-center font-serif text-2xl md:text-5xl'>Image Future Assignment</h4>
         <div className="divider divider-neutral" />
         <div className="grid grid-cols-6 gap-4">
           <div className="col-span-4">
