@@ -19,10 +19,13 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
           <div className="md:col-span-4">
             <HighlightNews highlightNews={highlightNews} />
+            <div className="divider divider-neutral" />
             <NormalNews normalNews={normalNews} />
+            <div className="divider divider-neutral md:hidden" />
           </div>
           <div className="md:col-span-2">
             <SideNewsNews sideNews={sideNews} />
+            <div className="divider divider-neutral" />
             <SmallSideNews smallSideNews={smallSideNews} />
           </div>
         </div>

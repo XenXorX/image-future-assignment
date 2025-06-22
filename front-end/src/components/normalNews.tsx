@@ -2,7 +2,7 @@ import convertDate from "@/lib/convertDate";
 
 export default function NormalNews({ normalNews }: any) {
     return (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {normalNews.map((news: any) => (
                 <div>
                     <a href={news.redirect_url} >

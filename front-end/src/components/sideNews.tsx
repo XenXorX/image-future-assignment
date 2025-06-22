@@ -13,7 +13,6 @@ export default function SideNewsNews({ sideNews }: any) {
                             <div className="badge badge-neutral badge-outline">{news.channel_name}</div>
                         </div>
                     </a>
-                    <div className="divider divider-neutral" />
                 </div >
             ))}
         </>

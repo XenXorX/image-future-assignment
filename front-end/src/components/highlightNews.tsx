@@ -28,7 +28,6 @@ export default function HighlightNews({ highlightNews }: any) {
                     <a href={'#news_' + news.entry_id} className="btn btn-xs">{i + 1}</a>
                 ))}
             </div>
-            <div className="divider divider-neutral" />
         </>
     );
 }
