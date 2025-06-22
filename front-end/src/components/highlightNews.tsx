@@ -7,11 +7,11 @@ export default function HighlightNews({ highlightNews }: any) {
                 {highlightNews.map((news: any) => (
                     <div id={'news_' + news.entry_id} className="carousel-item w-full">
                         <a href={news.redirect_url} >
-                            <div className="flex flex-row">
-                                <div className="basis-2/3">
+                            <div className="flex flex-col md:flex-row">
+                                <div className="md:basis-2/3">
                                     <img src={news.img_src} alt={news.title} />
                                 </div>
-                                <div className="basis-1/3 p-5">
+                                <div className="md:basis-1/3 p-5">
                                     <h2 className="text-xl font-bold mb-2">{news.title}</h2>
                                     <div className="flex justify-between">
                                         <p className="font-light">{convertDate(news.update_date)}</p>
@@ -21,8 +21,7 @@ export default function HighlightNews({ highlightNews }: any) {
                             </div>
                         </a>
                     </div >
-                ))
-                }
+                ))}
             </div >
             <div className="flex w-full justify-center gap-2 py-2">
                 {highlightNews.map((news: any, i: number) => (
